@@ -8,6 +8,7 @@ import {
 	Inserter,
 } from '@wordpress/block-editor';
 import { PinnedItems } from '@wordpress/interface';
+import { Button } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -74,7 +75,10 @@ export default function Header() {
 			</div>
 			<div className="edit-site-header__actions">
 				<SaveButton />
-				<PinnedItems.Slot scope="core/edit-site" />
+				<PinnedItems.Slot
+					as={ [ 'div', Button ] }
+					scope="core/edit-site"
+				/>
 				<MoreMenu />
 			</div>
 		</div>

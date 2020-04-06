@@ -9,26 +9,46 @@ import { cog, pencil } from '@wordpress/icons';
 const { Slot: InspectorSlot, Fill: InspectorFill } = createSlotFill(
 	'EditSiteSidebarInspector'
 );
+
+const DefaultSidebar = ( { areaId, title, icon, children } ) => {
+	return (
+		<>
+			<ComplementaryArea
+				scope="core/edit-site"
+				complementaryAreaIdentifier={ areaId }
+				title={ title }
+				icon={ icon }
+			>
+				{ children }
+			</ComplementaryArea>
+			<ComplementaryArea.MoreMenuItem
+				scope="core/edit-site"
+				complementaryAreaIdentifier={ areaId }
+				icon={ icon }
+			>
+				{ title }
+			</ComplementaryArea.MoreMenuItem>
+		</>
+	);
+};
 function Sidebar() {
 	return (
 		<>
 			<ComplementaryArea.Slot scope="core/edit-site" />
-			<ComplementaryArea
-				scope="core/edit-site"
-				complementaryAreaIdentifier="edit-site/block-inspector"
+			<DefaultSidebar
+				areaId="edit-site/block-inspector"
 				title={ __( 'Block Inspector' ) }
 				icon={ cog }
 			>
 				<InspectorSlot bubblesVirtually />
-			</ComplementaryArea>
-			<ComplementaryArea
-				scope="core/edit-site"
-				complementaryAreaIdentifier="edit-site/global-styles"
+			</DefaultSidebar>
+			<DefaultSidebar
+				areaId="edit-site/global-styles"
 				title={ __( 'Global Styles' ) }
 				icon={ pencil }
 			>
 				<p>Global Styles area</p>
-			</ComplementaryArea>
+			</DefaultSidebar>
 		</>
 	);
 }
